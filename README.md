@@ -4,9 +4,9 @@ Xainport Services can be used to create accounts that can issue digital certific
 
 # Current implemenation
 Current implementation contains of: 
-- ![smart contract](Xainport.Ethereum/Contracts/CitizenAttestations.sol) that was deploy on ![Rinkeby](https://rinkeby.etherscan.io/) Ethereum test network.
-   - Smart contract address: ![0xa1da03d100be75c4bb0df927915cf43c77a77cfd](https://rinkeby.etherscan.io/address/0xa1da03d100be75c4bb0df927915cf43c77a77cfd)
-   - Account that owns smart contract: 0x1CCd0b7Ee8e3462F0A7e6951Ee520B35E17c1c47 (Account transaction history can be seen ![here](https://rinkeby.etherscan.io/address/0x1CCd0b7Ee8e3462F0A7e6951Ee520B35E17c1c47))
+- [smart contract](Xainport.Ethereum/Contracts/CitizenAttestations.sol) that was deploy on [Rinkeby](https://rinkeby.etherscan.io/) Ethereum test network.
+   - Smart contract address: [0xa1da03d100be75c4bb0df927915cf43c77a77cfd](https://rinkeby.etherscan.io/address/0xa1da03d100be75c4bb0df927915cf43c77a77cfd)
+   - Account that owns smart contract: 0x1CCd0b7Ee8e3462F0A7e6951Ee520B35E17c1c47 (Account transaction history can be seen [here](https://rinkeby.etherscan.io/address/0x1CCd0b7Ee8e3462F0A7e6951Ee520B35E17c1c47))
 - Web API that can be used to interact with smart contract. API is hosted at https://xainportapi.azurewebsites.net
    - GET request: /api/attestations/getaccountbalance - get balance of the account that owns smart contract
    - GET request: /api/attestations/getdigitalsignatures/<accountaddress> - get all signatures for attestations of <account address>
