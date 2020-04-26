@@ -14,9 +14,6 @@ namespace Xainport.Contracts
         [JsonProperty(PropertyName = "citizenPublicAddress")]
         public string CitizenPublicAddress { get; set; }
 
-        [JsonProperty(PropertyName = "smartContractAddress")]
-        public string SmartContractAddress { get; set; }
-
         [JsonProperty(PropertyName = "issuerAccountAddress")]
         public string IssuerAccountAddress { get; set; }
 

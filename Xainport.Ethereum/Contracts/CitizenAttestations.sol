@@ -3,7 +3,6 @@ pragma experimental ABIEncoderV2;
 
 contract CitizenAttestations {
     address owner;
-    address citizenAddress;
 
     struct attestationSignature {
         string attestationId;
@@ -12,7 +11,7 @@ contract CitizenAttestations {
     }
 
     // citizen id -> signature
-    mapping(string => attestationSignature[]) public citizenAttestationSignatures;
+    mapping(address => attestationSignature[]) public citizenAttestationSignatures;
 
     modifier isOwner() {
         require(msg.sender == owner, "Not an owner.");
@@ -24,14 +23,14 @@ contract CitizenAttestations {
     }
 
     function addAttestationSignature(
-        string memory citizenId,
+        address citizenId,
         string memory attestationId,
         address attestationIssuer,
         string memory signature) public isOwner() {
         citizenAttestationSignatures[citizenId].push(attestationSignature(attestationId, attestationIssuer, signature));
     }
 
-    function getCitizenSignatures(string memory citizenId) public view returns(attestationSignature[] memory) {
+    function getCitizenSignatures(address citizenId) public view returns(attestationSignature[] memory) {
         return citizenAttestationSignatures[citizenId];
     }
 }

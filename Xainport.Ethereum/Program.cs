@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Numerics;
 using System.Threading.Tasks;
 using Nethereum.Signer;
 using Nethereum.Web3;
@@ -15,13 +14,15 @@ namespace Xainport.Ethereum
         static void Main(string[] args)
         {
             //Demo().Wait();
-            InitContract().Wait();
+            //InitContract().Wait();
         }
 
         static async Task InitContract()
         {
-            var url = "http://localhost:7545";
-            var privateKey = "62a87758c358e2f20ea8766687db2fd74f420cafea6d4d01ec92d3f6158f4a14";
+            var url = "https://rinkeby.infura.io/v3/e4c1c7027bb24016bc2ddd6ebfbf01fa";
+            var privateKey = "1E6BB00C8E929E700F1B4F24FA9C1942C6C333F7B845DD2813B30874F4E5E04C";
+
+            Console.WriteLine("Deploying contract");
 
             ICitizenAttestationRepository repo = await CitizenAttestationRepository.
                 ConstructCitizenAttestationRepositoryWithNewContract(url, privateKey);

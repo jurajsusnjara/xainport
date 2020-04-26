@@ -37,7 +37,7 @@ namespace xainport
             });
 
             services.Configure<EthereumNetworkConnectionOptions>(options =>
-                Configuration.Bind(nameof(EthereumNetworkConnectionOptions), options));
+                Configuration.Bind("EthereumRinkebyNetworkConnectionOptions", options));
 
             //CosmosClient cosmosClient = InitializeCosmosClient(Configuration.GetSection("CosmosDb"));
 

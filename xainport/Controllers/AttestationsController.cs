@@ -19,20 +19,34 @@ namespace Xainport.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class AttestationsController : ControllerBase
+    public class AttestationsController : Controller
     {
-        private readonly ICitizenAccountRepository citizenAccountRepository;
-        private readonly IIssuingAuthorityRepository issuingAuthorityRepository;
         private readonly EthereumNetworkConnectionOptions ethereumNetworkConnection;
+        private decimal accountBalance;
 
         public AttestationsController(
-            ICitizenAccountRepository citizenAccountRepository,
-            IIssuingAuthorityRepository issuingAuthorityRepository,
             IOptions<EthereumNetworkConnectionOptions> ethereumNetworkConnectionOptions)
         {
-            this.citizenAccountRepository = citizenAccountRepository;
-            this.issuingAuthorityRepository = issuingAuthorityRepository;
             ethereumNetworkConnection = ethereumNetworkConnectionOptions.Value;
+        }
+
+        public async Task<IActionResult> Play()
+        {
+            await UpdateAccountBalance();
+            ViewData["AccountBalance"] = accountBalance;
+            return View();
+        }
+
+        private async Task UpdateAccountBalance()
+        {
+            accountBalance = await Utility.GetAccountBalance(ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPublicAddress);
+        }
+
+        [HttpGet("getaccountbalance")]
+        public async Task<decimal> GetAccountBalance()
+        {
+            await UpdateAccountBalance();
+            return accountBalance;
         }
 
         [HttpGet("getdigitalsignatures/{citizenAccountAddress}")]
@@ -52,11 +66,12 @@ namespace Xainport.Controllers
         public async Task<string> PublishDigitalSignature([FromBody] AttestationSignatureContract attestationSignatureContract)
         {
             ICitizenAttestationRepository ethereumCitizenAttestationRepository = CitizenAttestationRepository.
-                    ConstructCitizenAttestationRepositoryWithExistingContract(
-                    ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, ethereumNetworkConnection.ContractAddress);
+                ConstructCitizenAttestationRepositoryWithExistingContract(
+                ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, ethereumNetworkConnection.ContractAddress);
 
             await ethereumCitizenAttestationRepository.AddAttestationSignature(
                 attestationSignatureContract.CitizenPublicAddress, attestationSignatureContract.Id, attestationSignatureContract.IssuerAccountAddress, attestationSignatureContract.Signature);
+
 
             return ethereumNetworkConnection.ContractAddress;
         }
