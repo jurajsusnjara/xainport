@@ -1,6 +1,6 @@
 # Xainport Services
 Xainport Services are the set of services that provide APIs to fetch, publish and create digital signatures on Ethereum blockchain.
-Xainport Services can be used to create accounts that can issue digital certificates for various attestations. Xainport keeps track of public identites of those issuers and keeps references to blockchain smart contracts where their digital signatures are stored.
+Xainport Services can be used to create accounts that can issue digital certificates of various attestations. Xainport keeps track of public identites of those issuers and keeps references to blockchain smart contracts where their digital signatures are stored.
 
 # Current implemenation
 Current implementation contains of: 
