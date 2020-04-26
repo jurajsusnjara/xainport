@@ -20,9 +20,6 @@ namespace Xainport.Contracts
         [JsonProperty(PropertyName = "issuerAccountAddress")]
         public string IssuerAccountAddress { get; set; }
 
-        [JsonProperty(PropertyName = "createdTime")]
-        public DateTime CreatedTime { get; set; }
-
         [JsonProperty(PropertyName = "signature")]
         public string Signature { get; set; }
     }

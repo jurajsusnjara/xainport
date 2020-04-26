@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Xainport.Ethereum.CitizenAttestations.ContractDefinition;
 
 namespace Xainport.Ethereum.Documents
 {
@@ -10,7 +11,7 @@ namespace Xainport.Ethereum.Documents
     {
         Task AddAttestationSignature(string citizenAccountAddress, string attestationId, string attestationIssuerAccountAddress, string signature);
 
-        Task<string> GetAttestationSignature(string citizenId, string attestationId);
+        Task<List<AttestationSignature>> GetCitizenSignatures(string citizenId);
 
         string GetContractAddress();
     }

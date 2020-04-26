@@ -32,9 +32,12 @@ namespace Xainport.Ethereum.Documents
             var receipt = await citizenAttestationsService.AddAttestationSignatureRequestAndWaitForReceiptAsync(citizenAccountAddress, attestationId, attestationIssuerAccountAddress, signature);
         }
 
-        public async Task<string> GetAttestationSignature(string citizenId, string attestationId)
+        public async Task<List<AttestationSignature>> GetCitizenSignatures(string citizenId)
         {
-            return await citizenAttestationsService.GetAttestationSignatureQueryAsync(citizenId, attestationId);
+            var result = await citizenAttestationsService.GetCitizenSignaturesQueryAsync(citizenId);
+            List <AttestationSignature> attestationSignatures = result.ReturnValue1;
+
+            return attestationSignatures;
         }
 
         public string GetContractAddress()

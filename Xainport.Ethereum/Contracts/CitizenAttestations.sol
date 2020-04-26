@@ -1,16 +1,18 @@
 pragma solidity >=0.4.0 <0.7.0;
+pragma experimental ABIEncoderV2;
 
 contract CitizenAttestations {
     address owner;
     address citizenAddress;
 
     struct attestationSignature {
+        string attestationId;
         address attestationIssuer;
         string issuerSignature;
     }
 
-    // citizen id -> attestation id -> signature
-    mapping(string => mapping(string => attestationSignature)) public citizenAttestationSignatures;
+    // citizen id -> signature
+    mapping(string => attestationSignature[]) public citizenAttestationSignatures;
 
     modifier isOwner() {
         require(msg.sender == owner, "Not an owner.");
@@ -26,11 +28,10 @@ contract CitizenAttestations {
         string memory attestationId,
         address attestationIssuer,
         string memory signature) public isOwner() {
-        mapping(string => attestationSignature) storage attestationSignatures = citizenAttestationSignatures[citizenId];
-        attestationSignatures[attestationId] = attestationSignature(attestationIssuer, signature);
+        citizenAttestationSignatures[citizenId].push(attestationSignature(attestationId, attestationIssuer, signature));
     }
 
-    function getAttestationSignature(string memory citizenId, string memory attestationId) public view returns(string memory) {
-        return citizenAttestationSignatures[citizenId][attestationId].issuerSignature;
+    function getCitizenSignatures(string memory citizenId) public view returns(attestationSignature[] memory) {
+        return citizenAttestationSignatures[citizenId];
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Xainport.Contracts;
 using Xainport.Documents;
+using Xainport.Ethereum.CitizenAttestations.ContractDefinition;
 using Xainport.Ethereum.Documents;
 using Xainport.Ethereum.Utility;
 using Xainport.Models;
@@ -34,50 +35,30 @@ namespace Xainport.Controllers
             ethereumNetworkConnection = ethereumNetworkConnectionOptions.Value;
         }
 
-        [HttpGet("issuingauthorityinfo/{publicAddress}")]
-        public async Task<IssuingAuthority> GetIssuingAuthorityInfo(string publicAddress)
+        [HttpGet("getdigitalsignatures/{citizenAccountAddress}")]
+        public async Task<List<AttestationSignature>> GetDigitalSignature(string citizenAccountAddress)
         {
-            return await issuingAuthorityRepository.GetIssuingAuthority(publicAddress);
+            ICitizenAttestationRepository ethereumCitizenAttestationRepository = CitizenAttestationRepository.
+                ConstructCitizenAttestationRepositoryWithExistingContract(
+                ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, ethereumNetworkConnection.ContractAddress);
+
+            List<AttestationSignature> attestationSignatures = await ethereumCitizenAttestationRepository.GetCitizenSignatures(citizenAccountAddress);
+
+            return attestationSignatures;
         }
 
         // returns smart contract address where information is stored
         [HttpPost("publishdigitalsignature")]
         public async Task<string> PublishDigitalSignature([FromBody] AttestationSignatureContract attestationSignatureContract)
         {
-            CitizenAccount citizenAccount = await citizenAccountRepository.
-                GetCitizenAccountForPublicAddress(attestationSignatureContract.CitizenPublicAddress);
-
-            if (citizenAccount == null)
-            {
-                throw new InvalidOperationException("Citizen account doesn't exist");
-            }
-
             ICitizenAttestationRepository ethereumCitizenAttestationRepository = CitizenAttestationRepository.
                     ConstructCitizenAttestationRepositoryWithExistingContract(
-                    ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, citizenAccount.CitizenAttestationsContractAddress);
-            
-            if (String.IsNullOrEmpty(citizenAccount.CitizenAttestationsContractAddress))
-            {
-                citizenAccount.CitizenAttestationsContractAddress = ethereumCitizenAttestationRepository.GetContractAddress();
-            }
+                    ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, ethereumNetworkConnection.ContractAddress);
 
             await ethereumCitizenAttestationRepository.AddAttestationSignature(
-                citizenAccount.PublicAddress, attestationSignatureContract.Id, attestationSignatureContract.IssuerAccountAddress, attestationSignatureContract.Signature);
+                attestationSignatureContract.CitizenPublicAddress, attestationSignatureContract.Id, attestationSignatureContract.IssuerAccountAddress, attestationSignatureContract.Signature);
 
-            return citizenAccount.CitizenAttestationsContractAddress;
-        }
-
-        [HttpGet("getdigitalsignature/{citizenAccountAddress}/{attestationId}")]
-        public async Task<string> GetDigitalSignature(string citizenAccountAddress, string attestationId)
-        {
-            CitizenAccount citizenAccount = await citizenAccountRepository.GetCitizenAccountForPublicAddress(citizenAccountAddress);
-
-            ICitizenAttestationRepository ethereumCitizenAttestationRepository = CitizenAttestationRepository.
-                ConstructCitizenAttestationRepositoryWithExistingContract(
-                ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, citizenAccount.CitizenAttestationsContractAddress);
-
-            return await ethereumCitizenAttestationRepository.GetAttestationSignature(
-                citizenAccountAddress, attestationId);
+            return ethereumNetworkConnection.ContractAddress;
         }
 
         [HttpPost("createdigitalsignature")]

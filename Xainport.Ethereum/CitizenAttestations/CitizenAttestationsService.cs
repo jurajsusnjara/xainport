@@ -79,7 +79,7 @@ namespace Xainport.Ethereum.CitizenAttestations
             return ContractHandler.QueryDeserializingToObjectAsync<CitizenAttestationSignaturesFunction, CitizenAttestationSignaturesOutputDTO>(citizenAttestationSignaturesFunction, blockParameter);
         }
 
-        public Task<CitizenAttestationSignaturesOutputDTO> CitizenAttestationSignaturesQueryAsync(string returnValue1, string returnValue2, BlockParameter blockParameter = null)
+        public Task<CitizenAttestationSignaturesOutputDTO> CitizenAttestationSignaturesQueryAsync(string returnValue1, BigInteger returnValue2, BlockParameter blockParameter = null)
         {
             var citizenAttestationSignaturesFunction = new CitizenAttestationSignaturesFunction();
                 citizenAttestationSignaturesFunction.ReturnValue1 = returnValue1;
@@ -88,19 +88,17 @@ namespace Xainport.Ethereum.CitizenAttestations
             return ContractHandler.QueryDeserializingToObjectAsync<CitizenAttestationSignaturesFunction, CitizenAttestationSignaturesOutputDTO>(citizenAttestationSignaturesFunction, blockParameter);
         }
 
-        public Task<string> GetAttestationSignatureQueryAsync(GetAttestationSignatureFunction getAttestationSignatureFunction, BlockParameter blockParameter = null)
+        public Task<GetCitizenSignaturesOutputDTO> GetCitizenSignaturesQueryAsync(GetCitizenSignaturesFunction getCitizenSignaturesFunction, BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryAsync<GetAttestationSignatureFunction, string>(getAttestationSignatureFunction, blockParameter);
+            return ContractHandler.QueryDeserializingToObjectAsync<GetCitizenSignaturesFunction, GetCitizenSignaturesOutputDTO>(getCitizenSignaturesFunction, blockParameter);
         }
 
-        
-        public Task<string> GetAttestationSignatureQueryAsync(string citizenId, string attestationId, BlockParameter blockParameter = null)
+        public Task<GetCitizenSignaturesOutputDTO> GetCitizenSignaturesQueryAsync(string citizenId, BlockParameter blockParameter = null)
         {
-            var getAttestationSignatureFunction = new GetAttestationSignatureFunction();
-                getAttestationSignatureFunction.CitizenId = citizenId;
-                getAttestationSignatureFunction.AttestationId = attestationId;
+            var getCitizenSignaturesFunction = new GetCitizenSignaturesFunction();
+                getCitizenSignaturesFunction.CitizenId = citizenId;
             
-            return ContractHandler.QueryAsync<GetAttestationSignatureFunction, string>(getAttestationSignatureFunction, blockParameter);
+            return ContractHandler.QueryDeserializingToObjectAsync<GetCitizenSignaturesFunction, GetCitizenSignaturesOutputDTO>(getCitizenSignaturesFunction, blockParameter);
         }
     }
 }
