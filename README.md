@@ -10,8 +10,7 @@ Current implementation contains of:
 - Web API that can be used to interact with smart contract. API is hosted at https://xainportapi.azurewebsites.net
    - GET request: /api/attestations/getaccountbalance - get balance of the account that owns smart contract
    - GET request: /api/attestations/getdigitalsignatures/{accountaddress} - get all signatures of attestations of {account address}
-   - POST request: /api/attestations/publishdigitalsignature - publish new digital signature to contract and returns contract address
-      - Example of POST request data:
+   - POST request: /api/attestations/publishdigitalsignature - publish new digital signature to contract and returns contract address. Example of POST request data:
   ```
       {
         "id": "1234",
