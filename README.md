@@ -24,7 +24,7 @@ All blockchain transactions made through this API are executed with account that
 This is test network so no real money is spent.
    
 
-# Subjects in Xainport system:
+# Subjects in Xainport system
 - **Attestation** - private document that needs to be signed by legitimate authority
 - **Issuing authority** - account that provides digital signature for citizen's attestations
 - **Citizen** - account for which attestations and attestations' signatures are issued
