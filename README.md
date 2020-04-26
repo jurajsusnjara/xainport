@@ -10,7 +10,7 @@ Current implementation contains of:
 - Web API that can be used to interact with smart contract. API is hosted at https://xainportapi.azurewebsites.net
    - GET request: /api/attestations/getaccountbalance - get balance of the account that owns smart contract
    - GET request: /api/attestations/getdigitalsignatures/<accountaddress> - get all signatures for attestations of <account address>
-   - POST request: /api/attestations/publishdigitalsignature - publish new digital signature to contract
+   - POST request: /api/attestations/publishdigitalsignature - publish new digital signature to contract and returns contract address
       - Example of POST request data:
   ```
       {
@@ -20,8 +20,11 @@ Current implementation contains of:
         "signature": "0xb7ce8483cCe83e84989f6c8021e84bb60Ca89f6c8021e8e84bb60Ca89f6c8021exb7ce8483cCc8021"
       }
   ```
+All blockchain transactions made through this API are executed with account that owns smart contract. Every POST transaction costs small amount of Ether so balance of this account will drop over time, check it at https://xainportapi.azurewebsites.net/api/attestations/getaccountbalance or browser Rinkeby for more info.
+This is test network so no real money is being spent.
+   
 
-Subjects in Xainport system:
+# Subjects in Xainport system:
 - **Attestation** - private document that needs to be signed by legitimate authority
 - **Issuing authority** - account that provides digital signature for citizen's attestations
 - **Citizen** - account for which attestations and attestations' signatures are issued
