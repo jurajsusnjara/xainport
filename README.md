@@ -20,8 +20,8 @@ Current implementation contains of:
         "signature": "0xb7ce8483cCe83e84989f6c8021e84bb60Ca89f6c8021e8e84bb60Ca89f6c8021exb7ce8483cCc8021"
       }
   ```
-All blockchain transactions made through this API are executed with account that owns smart contract. Every POST transaction costs small amount of Ether so balance of this account will drop over time, check it at https://xainportapi.azurewebsites.net/api/attestations/getaccountbalance or browser Rinkeby for more info.
-This is test network so no real money is being spent.
+All blockchain transactions made through this API are executed with account that owns smart contract. Every POST transaction costs small amount of Ether so balance of this account will drop over time, check it at https://xainportapi.azurewebsites.net/api/attestations/getaccountbalance or browse Rinkeby for more info.
+This is test network so no real money is spent.
    
 
 # Subjects in Xainport system:
