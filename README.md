@@ -9,7 +9,7 @@ Current implementation contains of:
    - Account that owns smart contract: [0x1CCd0b7Ee8e3462F0A7e6951Ee520B35E17c1c47](https://rinkeby.etherscan.io/address/0x1CCd0b7Ee8e3462F0A7e6951Ee520B35E17c1c47) (Account transaction history can be seen on previous link)
 - Web API that can be used to interact with smart contract. API is hosted at https://xainportapi.azurewebsites.net
    - GET request: /api/attestations/getaccountbalance - get balance of the account that owns smart contract
-   - GET request: /api/attestations/getdigitalsignatures/{accountaddress} - get all signatures for attestations of <account address>
+   - GET request: /api/attestations/getdigitalsignatures/{accountaddress} - get all signatures of attestations of {account address}
    - POST request: /api/attestations/publishdigitalsignature - publish new digital signature to contract and returns contract address
       - Example of POST request data:
   ```
