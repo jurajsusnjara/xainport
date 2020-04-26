@@ -60,37 +60,5 @@ namespace Xainport.Controllers
 
             return ethereumNetworkConnection.ContractAddress;
         }
-
-        [HttpPost("createdigitalsignature")]
-        public async Task<string> CreateDigitalSignature([FromBody] GenerateDigitalSignatureContract contract)
-        {
-            CitizenAccount citizenAccount = await citizenAccountRepository.GetCitizenAccountForPublicAddress(contract.CitizenAccountAddress);
-
-            ICitizenAttestationRepository ethereumCitizenAttestationRepository = CitizenAttestationRepository.
-                ConstructCitizenAttestationRepositoryWithExistingContract(
-                ethereumNetworkConnection.ConnectionUrl, ethereumNetworkConnection.AccountPrivateKey, ethereumNetworkConnection.ContractAddress);
-
-            Attestation attestation = new Attestation()
-            {
-                Id = contract.Id,
-                CitizenAccountAddress = contract.CitizenAccountAddress,
-                CreatedTime = contract.CreatedTime,
-                IssuerAccountAddress = contract.IssuerAccountAddress,
-                Payload = contract.Payload,
-                SmartContractAddress = ethereumNetworkConnection.ContractAddress
-            };
-
-            string message = JsonConvert.SerializeObject(attestation);
-
-            string signature = Crypto.CreateDigitalSignature(message, contract.PrivateKey);
-
-            await ethereumCitizenAttestationRepository.AddAttestationSignature(
-                citizenAccount.PublicAddress,
-                attestation.Id,
-                attestation.IssuerAccountAddress,
-                signature);
-
-            return signature;
-        }
     }
 }

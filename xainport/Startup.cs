@@ -39,15 +39,15 @@ namespace xainport
             services.Configure<EthereumNetworkConnectionOptions>(options =>
                 Configuration.Bind(nameof(EthereumNetworkConnectionOptions), options));
 
-            CosmosClient cosmosClient = InitializeCosmosClient(Configuration.GetSection("CosmosDb"));
+            //CosmosClient cosmosClient = InitializeCosmosClient(Configuration.GetSection("CosmosDb"));
 
-            services.AddSingleton<ICosmosDbService<CitizenAccount>>(InitializeCitizenAccountCosmosClientAsync(
-                    Configuration.GetSection("CosmosDb"), cosmosClient).GetAwaiter().GetResult());
-            services.AddSingleton<ICitizenAccountRepository, CitizenAccountRepository>();
+            //services.AddSingleton<ICosmosDbService<CitizenAccount>>(InitializeCitizenAccountCosmosClientAsync(
+            //        Configuration.GetSection("CosmosDb"), cosmosClient).GetAwaiter().GetResult());
+            //services.AddSingleton<ICitizenAccountRepository, CitizenAccountRepository>();
 
-            services.AddSingleton<ICosmosDbService<IssuingAuthority>>(InitializeIssuingAuthorityCosmosClientAsync(
-                    Configuration.GetSection("CosmosDb"), cosmosClient).GetAwaiter().GetResult());
-            services.AddSingleton<IIssuingAuthorityRepository, IssuingAuthorityRepository>();
+            //services.AddSingleton<ICosmosDbService<IssuingAuthority>>(InitializeIssuingAuthorityCosmosClientAsync(
+            //        Configuration.GetSection("CosmosDb"), cosmosClient).GetAwaiter().GetResult());
+            //services.AddSingleton<IIssuingAuthorityRepository, IssuingAuthorityRepository>();
 
             services.AddControllersWithViews();
 
