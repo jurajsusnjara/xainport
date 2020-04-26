@@ -13,6 +13,6 @@ Xainport Services technical implementation focuses around .NET Core framework an
 
 # Solution infrastructure
 
-
+(/img/xainport_infrastructure.PNG)
 
 # Data stored in Xainport system
