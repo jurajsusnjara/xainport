@@ -11,4 +11,8 @@ Xainport Services technical implementation focuses around .NET Core framework an
 - **Truffle** framework which offers development tools for Ethereum blockchain
 - **Nethereum** .NET integration library for blockchain
 
+# Solution infrastructure
+
+
+
 # Data stored in Xainport system
