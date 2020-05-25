@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xainport", "xainport\Xainpo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xainport.Ethereum", "Xainport.Ethereum\Xainport.Ethereum.csproj", "{C26E950F-D338-4103-82C0-D6F3DF3494B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XainportWeb", "XainportWeb\XainportWeb.csproj", "{42DB9FD8-C8F2-4FC1-872C-8983012B374A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C26E950F-D338-4103-82C0-D6F3DF3494B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26E950F-D338-4103-82C0-D6F3DF3494B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26E950F-D338-4103-82C0-D6F3DF3494B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42DB9FD8-C8F2-4FC1-872C-8983012B374A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42DB9FD8-C8F2-4FC1-872C-8983012B374A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42DB9FD8-C8F2-4FC1-872C-8983012B374A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42DB9FD8-C8F2-4FC1-872C-8983012B374A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
